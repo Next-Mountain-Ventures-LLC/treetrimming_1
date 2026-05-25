@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 env:
   # WordPress API configuration
   # Note: WORDPRESS_API_URL is the same for all sites (points to central WordPress instance)

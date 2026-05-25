@@ -1,0 +1,658 @@
+---
+import TreeLayout from "@/layouts/TreeLayout.astro";
+---
+
+<TreeLayout
+  title="Hodge Boys Tree Service | Forney, Crandall & Kemp TX"
+  description="Professional tree services in Forney, Crandall, Kemp, and DFW. Tree trimming, removal, stump grinding, land clearing & emergency services. Call 469-437-2740 for a free estimate."
+>
+
+<style is:global>
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    background: url('https://images.pexels.com/photos/34674271/pexels-photo-34674271.jpeg?auto=compress&cs=tinysrgb&w=1920') center center / cover no-repeat;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,30,15,0.85) 0%, rgba(10,30,15,0.6) 60%, rgba(10,30,15,0.3) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.2);
+    border: 1px solid #f59e0b;
+    color: #f59e0b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.08;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: #f59e0b; }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 580px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-trust {
+    margin-top: 48px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .hero-trust-item span:first-child {
+    width: 24px; height: 24px;
+    background: rgba(245,158,11,0.2);
+    border: 1px solid #f59e0b;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ===== TRUST BAR ===== */
+  .trust-bar {
+    background: #1a4d2e;
+    padding: 16px 24px;
+  }
+  .trust-bar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .trust-item .dot { color: #f59e0b; font-size: 18px; }
+
+  /* ===== WHY CHOOSE US ===== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .why-card {
+    background: #fff;
+    border: 1px solid #e8f5ee;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .why-icon {
+    width: 64px; height: 64px;
+    background: #e8f5ee;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 16px;
+  }
+  .why-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a4d2e;
+    margin-bottom: 10px;
+  }
+  .why-card p { font-size: 14px; color: #666; line-height: 1.6; }
+
+  /* ===== SERVICES ===== */
+  .services-section { background: #f8fdf9; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+  .service-card-img {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-card-img img { transform: scale(1.05); }
+  .service-card-body { padding: 24px; }
+  .service-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .service-icon-sm {
+    width: 40px; height: 40px;
+    background: #e8f5ee;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .service-card h3 { font-size: 17px; font-weight: 700; color: #1a4d2e; }
+  .service-card p { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+  .service-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a4d2e;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: gap 0.2s;
+  }
+  .service-link:hover { gap: 8px; }
+
+  /* ===== GALLERY ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+    display: block;
+  }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,30,15,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover::after { opacity: 1; }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-item-img-wrap { height: 220px; }
+  .gallery-item.tall .gallery-item-img-wrap { height: 100%; min-height: 456px; }
+  .gallery-item.wide .gallery-item-img-wrap { height: 220px; }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-section { background: #0f2419; }
+  .testimonials-section .section-title { color: #fff; }
+  .testimonials-section .section-sub { color: rgba(255,255,255,0.7); }
+  .testimonials-section .badge { background: rgba(82,183,136,0.2); color: #52b788; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .review-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .review-stars { color: #f59e0b; font-size: 18px; margin-bottom: 16px; }
+  .review-text { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .review-author { display: flex; align-items: center; gap: 12px; }
+  .review-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #1a4d2e;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #52b788;
+    font-style: normal;
+    flex-shrink: 0;
+  }
+  .review-name { font-weight: 700; color: #fff; font-size: 14px; }
+  .review-location { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .review-source { font-size: 11px; color: #52b788; font-weight: 600; }
+
+  /* ===== ABOUT TEASER ===== */
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 480px;
+  }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .about-img-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: #f59e0b;
+    color: #1a1a1a;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .about-img-badge span { display: block; font-size: 28px; font-weight: 900; line-height: 1; }
+  .about-content .section-title { margin-bottom: 16px; }
+  .about-content p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 16px; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .stat-box {
+    background: #e8f5ee;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-box .num { font-size: 32px; font-weight: 900; color: #1a4d2e; line-height: 1; }
+  .stat-box .lbl { font-size: 12px; color: #555; font-weight: 600; margin-top: 4px; }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    background: linear-gradient(135deg, #1a4d2e, #2d6a4f);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-banner h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: #fff; margin-bottom: 16px; }
+  .cta-banner p { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
+  .cta-banner-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.wide { grid-column: span 1; }
+    .about-split { grid-template-columns: 1fr; gap: 48px; }
+    .about-img-wrap { height: 360px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item.tall .gallery-item-img-wrap { min-height: 280px; }
+    .hero-btns { flex-direction: column; align-items: flex-start; }
+    .hero-btns a { width: 100%; justify-content: center; }
+    .trust-bar-inner { gap: 16px; justify-content: flex-start; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">⭐ Serving Forney, Crandall & DFW</div>
+      <h1>Professional Tree Services <span>You Can Trust</span></h1>
+      <p class="hero-sub">
+        Expert tree care for homeowners and businesses across Forney, Crandall, Kemp, 
+        Waxahachie, and the greater DFW area. Licensed, insured, and always committed 
+        to doing the job right.
+      </p>
+      <div class="hero-btns">
+        <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+          Get a Free Estimate →
+        </a>
+        <a href="tel:4694372740" class="btn-outline" style="font-size:16px; padding:15px 32px;">
+          📞 469-437-2740
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><span>✓</span> Licensed &amp; Insured</div>
+        <div class="hero-trust-item"><span>✓</span> Free Estimates</div>
+        <div class="hero-trust-item"><span>✓</span> 24/7 Emergency</div>
+        <div class="hero-trust-item"><span>✓</span> Family Owned</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="dot">★</span> 5-Star Rated Service</div>
+    <div class="trust-item"><span class="dot">✓</span> Fully Licensed &amp; Insured</div>
+    <div class="trust-item"><span class="dot">✓</span> Free Estimates</div>
+    <div class="trust-item"><span class="dot">✓</span> Emergency Service Available 24/7</div>
+    <div class="trust-item"><span class="dot">✓</span> Locally Owned &amp; Operated</div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="section">
+  <div class="container">
+    <div class="badge">Why Choose Us</div>
+    <h2 class="section-title">The Hodge Boys Difference</h2>
+    <p class="section-sub">We're not just a tree company — we're your neighbors. Here's why hundreds of DFW homeowners trust us with their trees.</p>
+
+    <div class="why-grid">
+      <div class="why-card card-hover">
+        <div class="why-icon">🛡️</div>
+        <h3>Licensed &amp; Insured</h3>
+        <p>Fully licensed and insured for your complete peace of mind. We protect your property and our crew on every job.</p>
+      </div>
+      <div class="why-card card-hover">
+        <div class="why-icon">💬</div>
+        <h3>Free Estimates</h3>
+        <p>No surprises, no pressure. We come out, assess your trees, and give you a clear, honest quote at no charge.</p>
+      </div>
+      <div class="why-card card-hover">
+        <div class="why-icon">🏠</div>
+        <h3>Locally Owned</h3>
+        <p>We live and work in this community. Forney, Crandall, Kemp — this is our home too, and we treat your property like it.</p>
+      </div>
+      <div class="why-card card-hover">
+        <div class="why-icon">⚡</div>
+        <h3>Emergency Services</h3>
+        <p>Storm damage can't wait. We offer 24/7 emergency response for fallen trees, dangerous limbs, and urgent situations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES OVERVIEW -->
+<section class="section services-section">
+  <div class="container">
+    <div class="badge">What We Do</div>
+    <h2 class="section-title">Our Tree Services</h2>
+    <p class="section-sub">From a single tree trim to full land clearing — we handle it all with skill, safety, and professionalism.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/34674271/pexels-photo-34674271.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tree Trimming Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">✂️</div>
+            <h3>Tree Trimming &amp; Pruning</h3>
+          </div>
+          <p>Shape, strengthen, and beautify your trees. Proper pruning improves health, reduces hazards, and keeps your property looking its best.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/8821018/pexels-photo-8821018.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tree Removal Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">🪓</div>
+            <h3>Tree Removal</h3>
+          </div>
+          <p>Safe, efficient removal of dead, damaged, or unwanted trees. We use proper rigging techniques to protect your home and landscape.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/9806894/pexels-photo-9806894.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stump Grinding Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">🔄</div>
+            <h3>Stump Grinding</h3>
+          </div>
+          <p>Get rid of those unsightly stumps for good. We grind stumps below grade so you can reclaim your yard and eliminate tripping hazards.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/7763704/pexels-photo-7763704.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Land Clearing Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">🚜</div>
+            <h3>Land Clearing</h3>
+          </div>
+          <p>Residential and commercial lot clearing for new construction, fencing, farming, or reclaiming overgrown property.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/5494032/pexels-photo-5494032.png?auto=compress&cs=tinysrgb&w=600" alt="Emergency Tree Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">🚨</div>
+            <h3>Emergency Tree Service</h3>
+          </div>
+          <p>When a storm strikes, we respond fast. Our crew is available 24/7 to handle fallen trees, dangerous limbs, and urgent situations.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://images.pexels.com/photos/7812853/pexels-photo-7812853.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tree Health Service" loading="lazy" />
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon-row">
+            <div class="service-icon-sm">🌿</div>
+            <h3>Tree Health &amp; Maintenance</h3>
+          </div>
+          <p>Fertilization, disease treatment, and regular inspections to keep your trees thriving season after season.</p>
+          <a href="/services" class="service-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="section">
+  <div class="container">
+    <div class="badge">Our Work</div>
+    <h2 class="section-title">See What We Can Do For You</h2>
+    <p class="section-sub">Real jobs. Real results. Check out some of our recent work across the DFW area.</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <div class="gallery-item-img-wrap">
+          <img src="https://images.pexels.com/photos/34674271/pexels-photo-34674271.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Arborist tree climbing work" loading="lazy" />
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-img-wrap">
+          <img src="https://images.pexels.com/photos/8821018/pexels-photo-8821018.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Professional chainsaw tree removal" loading="lazy" />
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-img-wrap">
+          <img src="https://images.pexels.com/photos/7812853/pexels-photo-7812853.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tree cutting crew at work" loading="lazy" />
+        </div>
+      </div>
+      <div class="gallery-item wide">
+        <div class="gallery-item-img-wrap">
+          <img src="https://images.pexels.com/photos/7763704/pexels-photo-7763704.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Land clearing equipment Kubota skid steer" loading="lazy" />
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-img-wrap">
+          <img src="https://images.pexels.com/photos/9806894/pexels-photo-9806894.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Stump grinding result" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="badge">Customer Reviews</div>
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-sub">Don't just take our word for it — hear from your neighbors across Forney, Crandall, and the DFW area.</p>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Hodge Boys did an incredible job removing two massive oak trees in our backyard. Dorrell and his crew were professional, efficient, and cleaned up every last branch. Our yard looks amazing and they didn't damage a single thing. Will definitely use them again!"</p>
+        <div class="review-author">
+          <div class="review-avatar">MR</div>
+          <div>
+            <div class="review-name">Mike R.</div>
+            <div class="review-location">Forney, TX</div>
+            <div class="review-source">⭐ Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Called them after a storm knocked a huge limb onto our fence. They came out the same day and had it cleared within a couple hours. Fair price, great communication, and they went above and beyond to make sure everything was safe. Highly recommend to anyone in the Crandall area!"</p>
+        <div class="review-author">
+          <div class="review-avatar">ST</div>
+          <div>
+            <div class="review-name">Sarah T.</div>
+            <div class="review-location">Crandall, TX</div>
+            <div class="review-source">⭐ Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We had about an acre that needed clearing for a new build. Hodge Boys came in with the right equipment and knocked it out faster than I expected. Dorrell is honest, hardworking, and gave us the most competitive price out of three bids. This is the crew you want!"</p>
+        <div class="review-author">
+          <div class="review-avatar">JW</div>
+          <div>
+            <div class="review-name">James W.</div>
+            <div class="review-location">Kemp, TX</div>
+            <div class="review-source">⭐ Google Review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT TEASER -->
+<section class="section">
+  <div class="container">
+    <div class="about-split">
+      <div class="about-img-wrap">
+        <img src="https://images.pexels.com/photos/7812853/pexels-photo-7812853.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Hodge Boys Tree Service crew at work" loading="lazy" />
+        <div class="about-img-badge">
+          <span>10+</span>
+          Years of Experience
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="badge">About Us</div>
+        <h2 class="section-title">Family-Run. Community-Focused. Results-Driven.</h2>
+        <p>Hodge Boys Tree Service is a locally owned and operated business founded by Dorrell Hodge right here in the Forney/Crandall/Kemp area. We're not a big national franchise — we're your neighbors, and we take pride in treating every customer like family.</p>
+        <p>With years of hands-on experience and the right equipment for any job, our crew brings professionalism, care, and hard work to every single project — no matter the size.</p>
+
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="num">500+</div>
+            <div class="lbl">Jobs Completed</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">100%</div>
+            <div class="lbl">Satisfaction Rate</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">24/7</div>
+            <div class="lbl">Emergency Response</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">DFW</div>
+            <div class="lbl">Service Area</div>
+          </div>
+        </div>
+
+        <a href="/about" class="btn-secondary">Learn Our Story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Ready to Get Started?</h2>
+  <p>Get a free estimate today — no obligation, no pressure. Just honest tree service from your local experts.</p>
+  <div class="cta-banner-btns">
+    <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+      Request a Free Estimate →
+    </a>
+    <a href="tel:4694372740" style="color:#fff; font-size:18px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">
+      📞 469-437-2740
+    </a>
+  </div>
+</section>
+
+</TreeLayout>

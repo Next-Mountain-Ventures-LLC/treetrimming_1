@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogPost from "@/components/blog/BlogPost.astro";
+import { getPosts, getPostBySlug } from "@/lib/wordpress";
+import { generateExcerpt, cleanHtmlForDisplay } from "@/lib/utils";
+import RelatedPosts from "@/components/blog/RelatedPosts.astro";
+
+// This defines the dynamic paths that will be pre-rendered at build time
+export async function getStaticPaths() {
+  try {
+    console.log("🔨 Astro: Starting blog page generation...");
+
+    // Get all posts from WordPress API (astrobot-design category)
+    const allPosts = await getPosts(1, 100);
+
+    console.log(`✅ Astro: Generated ${allPosts.length} blog post pages from WordPress API`);
+
+    // Warn if we seem to be falling back to mock data
+    if (allPosts.length <= 3) {
+      console.warn(`⚠️ Astro: Only ${allPosts.length} posts found! This might indicate a WordPress API failure.`);
+      console.warn('⚠️ Astro: The site may be using mock/fallback data instead of live WordPress content.');
+      console.warn('⚠️ Astro: Check that WordPress API is accessible and the "astrobot-design" category exists.');
+    }
+
+    // Create a path for each post, passing all posts to avoid re-fetching in component
+    return allPosts.map((post) => ({
+      params: { slug: post.slug },
+      props: { post, allPosts },
+    }));
+  } catch (error) {
+    console.error("❌ Astro: Error generating static paths:", error);
+    return [];
+  }
+}
+
+// Get the post and all posts from props (already fetched in getStaticPaths)
+const { post, allPosts } = Astro.props;
+
+// For SEO
+const metaDescription = generateExcerpt(post.excerpt, 160);
+
+// Convert the featuredMedia URL to a URL object for OG image
+let ogImage;
+if (post.featuredMedia?.url) {
+  ogImage = new URL(post.featuredMedia.url);
+}
+---
+
+<BaseLayout
+  title={`${cleanHtmlForDisplay(post.title)} | Astrobot.design Blog`}
+  description={metaDescription}
+  ogImage={ogImage}
+>
+  <BlogPost post={post} allPosts={allPosts} />
+
+{allPosts.length > 0 && (
+  <div class="container mx-auto px-4 pb-16">
+    <div class="max-w-3xl mx-auto">
+      <RelatedPosts currentPost={post} allPosts={allPosts} />
+    </div>
+  </div>
+)}
+</BaseLayout>

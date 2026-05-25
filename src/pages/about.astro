@@ -1,0 +1,362 @@
+---
+import TreeLayout from "@/layouts/TreeLayout.astro";
+---
+
+<TreeLayout
+  title="About Us | Hodge Boys Tree Service | Dorrell Hodge"
+  description="Learn about Hodge Boys Tree Service, a family-owned tree care company founded by Dorrell Hodge in Forney, TX. Serving the DFW and East Texas area with pride and professionalism."
+>
+
+<style is:global>
+  /* PAGE HERO */
+  .page-hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    background: url('https://images.pexels.com/photos/7812853/pexels-photo-7812853.jpeg?auto=compress&cs=tinysrgb&w=1920') center 30% / cover no-repeat;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,30,15,0.88) 0%, rgba(10,30,15,0.65) 100%);
+  }
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 0;
+  }
+  .page-hero h1 { font-size: clamp(32px, 5vw, 60px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+  .page-hero h1 span { color: #f59e0b; }
+  .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 560px; line-height: 1.6; }
+  .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+  .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+  .breadcrumb a:hover { color: #f59e0b; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); font-size: 13px; }
+  .breadcrumb .current { color: #f59e0b; font-size: 13px; font-weight: 600; }
+
+  /* STORY SECTION */
+  .story-section { padding: 80px 0; }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .story-img-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 520px;
+  }
+  .story-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .story-img-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(10,30,15,0.9));
+    padding: 32px;
+  }
+  .story-img-quote {
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    border-left: 3px solid #f59e0b;
+    padding-left: 16px;
+  }
+  .story-img-quote cite { display: block; margin-top: 8px; color: #f59e0b; font-style: normal; font-weight: 700; font-size: 13px; }
+  .story-content h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; color: #1a4d2e; margin-bottom: 20px; line-height: 1.15; }
+  .story-content p { font-size: 15px; color: #555; line-height: 1.85; margin-bottom: 18px; }
+
+  /* VALUES */
+  .values-section { background: #f8fdf9; padding: 80px 0; }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .value-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border-top: 4px solid #1a4d2e;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+  .value-icon { font-size: 48px; display: block; margin-bottom: 20px; }
+  .value-card h3 { font-size: 20px; font-weight: 800; color: #1a4d2e; margin-bottom: 12px; }
+  .value-card p { font-size: 14px; color: #666; line-height: 1.7; }
+
+  /* TEAM SECTION */
+  .team-section { padding: 80px 0; }
+  .team-intro { max-width: 700px; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    align-items: start;
+  }
+  .team-main {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+  .team-main-img { height: 400px; overflow: hidden; }
+  .team-main-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .team-main:hover .team-main-img img { transform: scale(1.04); }
+  .team-main-body { padding: 32px; }
+  .team-name { font-size: 24px; font-weight: 800; color: #1a4d2e; margin-bottom: 4px; }
+  .team-title { font-size: 13px; color: #f59e0b; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+  .team-bio { font-size: 14px; color: #555; line-height: 1.8; }
+
+  .team-side { display: flex; flex-direction: column; gap: 20px; }
+  .crew-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .crew-card:hover { transform: translateX(4px); }
+  .crew-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #e8f5ee;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .crew-name { font-size: 16px; font-weight: 700; color: #1a4d2e; margin-bottom: 2px; }
+  .crew-role { font-size: 11px; color: #f59e0b; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .crew-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+  .equipment-card {
+    background: #e8f5ee;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    border-left: 4px solid #1a4d2e;
+  }
+  .equipment-card h4 { font-size: 15px; font-weight: 700; color: #1a4d2e; margin-bottom: 12px; }
+  .equipment-list { list-style: none; }
+  .equipment-list li {
+    font-size: 13px;
+    color: #444;
+    padding: 4px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .equipment-list li::before { content: '🔧'; }
+
+  /* MILESTONES */
+  .milestones-section { background: #1a4d2e; padding: 60px 0; }
+  .milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+  .milestone .num { font-size: 48px; font-weight: 900; color: #f59e0b; line-height: 1; }
+  .milestone .lbl { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); margin-top: 8px; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, #0f2419, #1a4d2e);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-banner h2 { font-size: clamp(26px, 3.5vw, 44px); font-weight: 800; color: #fff; margin-bottom: 16px; }
+  .cta-banner p { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
+  .cta-banner-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .story-grid { grid-template-columns: 1fr; gap: 48px; }
+    .story-img-wrap { height: 360px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .milestones-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .milestones-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+</style>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span class="current">About Us</span>
+    </div>
+    <h1>About <span>Hodge Boys</span><br />Tree Service</h1>
+    <p>Locally rooted in Forney, TX — driven by family values, hard work, and a passion for the craft.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img-wrap">
+        <img src="https://images.pexels.com/photos/34674271/pexels-photo-34674271.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Hodge Boys Tree Service crew working" loading="lazy" />
+        <div class="story-img-overlay">
+          <blockquote class="story-img-quote">
+            "We treat every job like it's our own property — because in this community, it practically is."
+            <cite>— Dorrell Hodge, Owner &amp; Founder</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="story-content">
+        <div class="badge">Our Story</div>
+        <h2>Started from the Ground Up — Just Like the Trees We Love</h2>
+        <p>Hodge Boys Tree Service was founded by Dorrell Hodge, a proud East Texas native who grew up with a deep respect for the land and the trees that define this region. What started as a passion for outdoor work and helping neighbors quickly grew into a full-service tree care company built on reputation and results.</p>
+        <p>Operating out of the Forney, Crandall, and Kemp area, Dorrell has built a crew of hardworking, skilled professionals who share his commitment to doing the job right — every time. We're not here to cut corners or rush through jobs. We take the time to do it properly, safely, and with respect for your property.</p>
+        <p>Over the years, we've served hundreds of families and businesses across the DFW Metroplex and East Texas — from removing single dead trees to clearing full acres of land for new construction. No job is too big or too small for the Hodge Boys crew.</p>
+        <p>When you call Hodge Boys, you're not calling a call center or a franchise. You're calling Dorrell directly — a local business owner who personally oversees the work and stands behind every job we do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section class="milestones-section">
+  <div class="container">
+    <div class="milestones-grid">
+      <div class="milestone">
+        <div class="num">10+</div>
+        <div class="lbl">Years of Experience</div>
+      </div>
+      <div class="milestone">
+        <div class="num">500+</div>
+        <div class="lbl">Jobs Completed</div>
+      </div>
+      <div class="milestone">
+        <div class="num">100%</div>
+        <div class="lbl">Customer Satisfaction</div>
+      </div>
+      <div class="milestone">
+        <div class="num">24/7</div>
+        <div class="lbl">Emergency Response</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="badge">What Drives Us</div>
+    <h2 class="section-title">Our Core Values</h2>
+    <p class="section-sub">Everything we do comes back to three things. These aren't just words on a page — they're how we run every job, every day.</p>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🛡️</span>
+        <h3>Safety First</h3>
+        <p>Tree work is inherently dangerous. We never cut corners when it comes to safety — for our crew, for your family, and for your property. Every job starts with a thorough assessment and a safety plan.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">⭐</span>
+        <h3>Quality Work</h3>
+        <p>We take pride in the quality of our cuts, our cleanup, and our results. When Hodge Boys leaves your property, it should look better than when we arrived — that's the standard we hold ourselves to.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🤝</span>
+        <h3>Customer Satisfaction</h3>
+        <p>Your satisfaction isn't just a goal — it's a requirement. We communicate clearly, show up when we say we will, and don't consider the job done until you're happy with the result.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="team-intro">
+      <div class="badge">Meet The Team</div>
+      <h2 class="section-title">The People Behind The Work</h2>
+      <p class="section-sub">Our crew is the heart of Hodge Boys. Every member is trained, careful, and committed to delivering the quality work our customers expect.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-main">
+        <div class="team-main-img">
+          <img src="https://images.pexels.com/photos/8821018/pexels-photo-8821018.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dorrell Hodge - Owner of Hodge Boys Tree Service" loading="lazy" />
+        </div>
+        <div class="team-main-body">
+          <div class="team-name">Dorrell Hodge</div>
+          <div class="team-title">Owner &amp; Founder</div>
+          <p class="team-bio">Dorrell is the heart and soul of Hodge Boys Tree Service. Born and raised in East Texas, he's been working with trees most of his life and brings that deep, hands-on knowledge to every job. Dorrell personally oversees operations, handles estimates, and is often out in the field alongside his crew. His passion for quality work and his commitment to his customers is what sets Hodge Boys apart.</p>
+        </div>
+      </div>
+
+      <div class="team-side">
+        <div class="crew-card">
+          <div class="crew-avatar">🪜</div>
+          <div>
+            <div class="crew-name">Lead Climbers</div>
+            <div class="crew-role">Certified Arborist Crew</div>
+            <p class="crew-desc">Our lead climbers are experienced professionals with years of training in rope work, rigging, and precision cutting. They handle even the most complex removals and trims with confidence and skill.</p>
+          </div>
+        </div>
+
+        <div class="crew-card">
+          <div class="crew-avatar">🚜</div>
+          <div>
+            <div class="crew-name">Ground Crew</div>
+            <div class="crew-role">Operations &amp; Cleanup Team</div>
+            <p class="crew-desc">Our ground crew keeps every job running smoothly — from equipment operation to debris management and site cleanup. Professional, efficient, and always safety-conscious.</p>
+          </div>
+        </div>
+
+        <div class="crew-card">
+          <div class="crew-avatar">📋</div>
+          <div>
+            <div class="crew-name">Estimate Team</div>
+            <div class="crew-role">Customer Service</div>
+            <p class="crew-desc">From your first call to project completion, we're here to answer questions, provide honest assessments, and make sure you have a great experience with Hodge Boys from start to finish.</p>
+          </div>
+        </div>
+
+        <div class="equipment-card">
+          <h4>🔧 Our Equipment</h4>
+          <ul class="equipment-list">
+            <li>Kubota SVL75-3 Track Skid Steer</li>
+            <li>Grapple &amp; Mulching Attachments</li>
+            <li>Professional Climbing Gear &amp; Rigging</li>
+            <li>Stihl Chainsaw Fleet</li>
+            <li>16-Ton Dump Trailer</li>
+            <li>Wood Chipper</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Let's Work Together</h2>
+  <p>Ready to experience the Hodge Boys difference? Contact us today for a free, no-pressure estimate on any tree service.</p>
+  <div class="cta-banner-btns">
+    <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+      Get Your Free Estimate →
+    </a>
+    <a href="tel:4694372740" style="color:#fff; font-size:18px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">
+      📞 469-437-2740
+    </a>
+  </div>
+</section>
+
+</TreeLayout>

@@ -1,0 +1,61 @@
+---
+import "@/styles/global.css";
+import "@/styles/fonts.css";
+import { Image } from 'astro:assets';
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  ogImage?: URL | undefined;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const defaultOgImage = "https://cdn.builder.io/api/v1/image/assets%2F5193f7a05d654f0c98a0a70f48ef2387%2F536cf55d30534749b00eb49d8527220e?format=webp&width=800&height=1200";
+
+if (Astro.props.ogImage === undefined) {
+  Astro.props.ogImage = defaultOgImage;
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+
+<meta charset="utf-8" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Font preconnect for better performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://plausible.io" />
+<meta name="generator" content="new.website - https://new.website" />
+<meta name="keywords" content="fast websites, astro framework, web design, AI technology, web development, static websites, SEO optimized" />
+<meta name="author" content="Astrobot.design" />
+<link rel="canonical" href={canonicalURL} />
+<link
+  rel="icon"
+  type="image/webp"
+  href="https://cdn.builder.io/api/v1/image/assets%2F5193f7a05d654f0c98a0a70f48ef2387%2F6c67eafd9f1c4be5b2015fdc51ff900d?format=webp&width=512&height=512"
+/>
+<link
+  rel="apple-touch-icon"
+  href="https://cdn.builder.io/api/v1/image/assets%2F5193f7a05d654f0c98a0a70f48ef2387%2F6c67eafd9f1c4be5b2015fdc51ff900d?format=webp&width=180&height=180"
+/>
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- DO NOT REMOVE - Plausible Analytics must always be enabled -->
+<script defer data-domain="astrobot.design" src="https://plausible.io/js/script.js"></script>

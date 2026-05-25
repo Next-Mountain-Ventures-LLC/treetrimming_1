@@ -1,0 +1,13 @@
+---
+import { getPosts } from "@/lib/wordpress";
+import BlogCarousel from "./BlogCarousel";
+
+// Fetch blog posts at build time (use per_page=100 to ensure consistent WordPress API results)
+const allPosts = await getPosts(1, 100);
+// Display first 6 posts in carousel
+const posts = allPosts.slice(0, 6);
+---
+
+{posts.length > 0 && (
+  <BlogCarousel posts={posts} client:load />
+)}

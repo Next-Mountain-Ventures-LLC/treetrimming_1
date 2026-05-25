@@ -1,5 +1,6 @@
 ---
 import TreeLayout from "@/layouts/TreeLayout.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <TreeLayout
@@ -356,7 +357,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
         to doing the job right.
       </p>
       <div class="hero-btns">
-        <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+        <a href={base + "contact"} class="btn-primary" style="font-size:16px; padding:16px 32px;">
           Get a Free Estimate →
         </a>
         <a href="tel:4694372740" class="btn-outline" style="font-size:16px; padding:15px 32px;">
@@ -434,7 +435,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Tree Trimming &amp; Pruning</h3>
           </div>
           <p>Shape, strengthen, and beautify your trees. Proper pruning improves health, reduces hazards, and keeps your property looking its best.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
 
@@ -448,7 +449,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Tree Removal</h3>
           </div>
           <p>Safe, efficient removal of dead, damaged, or unwanted trees. We use proper rigging techniques to protect your home and landscape.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
 
@@ -462,7 +463,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Stump Grinding</h3>
           </div>
           <p>Get rid of those unsightly stumps for good. We grind stumps below grade so you can reclaim your yard and eliminate tripping hazards.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
 
@@ -476,7 +477,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Land Clearing</h3>
           </div>
           <p>Residential and commercial lot clearing for new construction, fencing, farming, or reclaiming overgrown property.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
 
@@ -490,7 +491,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Emergency Tree Service</h3>
           </div>
           <p>When a storm strikes, we respond fast. Our crew is available 24/7 to handle fallen trees, dangerous limbs, and urgent situations.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
 
@@ -504,7 +505,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
             <h3>Tree Health &amp; Maintenance</h3>
           </div>
           <p>Fertilization, disease treatment, and regular inspections to keep your trees thriving season after season.</p>
-          <a href="/services" class="service-link">Learn More →</a>
+          <a href={base + "services"} class="service-link">Learn More →</a>
         </div>
       </div>
     </div>
@@ -635,7 +636,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
           </div>
         </div>
 
-        <a href="/about" class="btn-secondary">Learn Our Story →</a>
+        <a href={base + "about"} class="btn-secondary">Learn Our Story →</a>
       </div>
     </div>
   </div>
@@ -646,7 +647,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
   <h2>Ready to Get Started?</h2>
   <p>Get a free estimate today — no obligation, no pressure. Just honest tree service from your local experts.</p>
   <div class="cta-banner-btns">
-    <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+    <a href={base + "contact"} class="btn-primary" style="font-size:16px; padding:16px 32px;">
       Request a Free Estimate →
     </a>
     <a href="tel:4694372740" style="color:#fff; font-size:18px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">

@@ -16,6 +16,7 @@ const { post, allPosts = [] } = Astro.props;
 
 // Get the full URL for the current post
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="container mx-auto py-12 px-4">
@@ -107,7 +108,7 @@ const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <!-- Back to Blog -->
     <div class="text-center mt-12">
       <a 
-        href="/blog" 
+        href={base + "blog"}
         class="inline-flex items-center px-4 py-2 bg-secondary/50 text-primary border border-primary/20 rounded-md hover:bg-primary/10 transition-colors"
       >
         <span class="transform rotate-180 mr-2">→</span>

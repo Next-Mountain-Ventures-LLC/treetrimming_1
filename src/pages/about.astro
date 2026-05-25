@@ -1,5 +1,6 @@
 ---
 import TreeLayout from "@/layouts/TreeLayout.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <TreeLayout
@@ -194,7 +195,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
 <section class="page-hero">
   <div class="container page-hero-content">
     <div class="breadcrumb">
-      <a href="/">Home</a>
+      <a href={base}>Home</a>
       <span>/</span>
       <span class="current">About Us</span>
     </div>
@@ -350,7 +351,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
   <h2>Let's Work Together</h2>
   <p>Ready to experience the Hodge Boys difference? Contact us today for a free, no-pressure estimate on any tree service.</p>
   <div class="cta-banner-btns">
-    <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+    <a href={base + "contact"} class="btn-primary" style="font-size:16px; padding:16px 32px;">
       Get Your Free Estimate →
     </a>
     <a href="tel:4694372740" style="color:#fff; font-size:18px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">

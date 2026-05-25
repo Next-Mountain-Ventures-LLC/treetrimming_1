@@ -1,5 +1,6 @@
 ---
 import TreeLayout from "@/layouts/TreeLayout.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <TreeLayout
@@ -227,7 +228,7 @@ import TreeLayout from "@/layouts/TreeLayout.astro";
 <section class="page-hero">
   <div class="container page-hero-content">
     <div class="breadcrumb">
-      <a href="/">Home</a>
+      <a href={base}>Home</a>
       <span>/</span>
       <span class="current">Contact</span>
     </div>

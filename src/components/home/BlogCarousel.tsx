@@ -230,7 +230,7 @@ export default function BlogCarousel({ posts }: BlogCarouselProps) {
             className="border-primary/30 bg-secondary/80 hover:bg-primary/10"
             asChild
           >
-            <a href="/blog">
+            <a href={import.meta.env.BASE_URL + "blog"}>
               View All Articles <ArrowRight className="ml-1 h-4 w-4" />
             </a>
           </Button>

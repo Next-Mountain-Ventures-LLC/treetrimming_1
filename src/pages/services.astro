@@ -1,0 +1,343 @@
+---
+import TreeLayout from "@/layouts/TreeLayout.astro";
+---
+
+<TreeLayout
+  title="Tree Services | Hodge Boys Tree Service | Forney TX"
+  description="Professional tree trimming, removal, stump grinding, land clearing, emergency tree service and tree health care in Forney, Crandall, Kemp and DFW Texas. Call 469-437-2740."
+>
+
+<style is:global>
+  /* PAGE HERO */
+  .page-hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    background: url('https://images.pexels.com/photos/8821018/pexels-photo-8821018.jpeg?auto=compress&cs=tinysrgb&w=1920') center 40% / cover no-repeat;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,30,15,0.88) 0%, rgba(10,30,15,0.65) 100%);
+  }
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 0;
+  }
+  .page-hero h1 {
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .page-hero h1 span { color: #f59e0b; }
+  .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 560px; line-height: 1.6; }
+  .breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+  .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+  .breadcrumb a:hover { color: #f59e0b; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); font-size: 13px; }
+  .breadcrumb .current { color: #f59e0b; font-size: 13px; font-weight: 600; }
+
+  /* SERVICES DETAIL */
+  .services-detail { padding: 80px 0; }
+  .service-detail-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    margin-bottom: 32px;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-detail-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.14); }
+  .service-detail-card.reverse { direction: rtl; }
+  .service-detail-card.reverse > * { direction: ltr; }
+  .service-detail-img {
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-detail-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .service-detail-card:hover .service-detail-img img { transform: scale(1.04); }
+  .service-detail-body {
+    padding: 48px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .service-detail-icon {
+    width: 60px; height: 60px;
+    background: #e8f5ee;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .service-detail-body h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1a4d2e;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .service-detail-body p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .service-detail-bullets {
+    list-style: none;
+    margin: 16px 0 24px;
+  }
+  .service-detail-bullets li {
+    font-size: 14px;
+    color: #444;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .service-detail-bullets li::before {
+    content: '✓';
+    color: #1a4d2e;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* SERVICE AREA */
+  .service-area { background: #f8fdf9; padding: 80px 0; }
+  .service-area h2 { font-size: 36px; font-weight: 800; color: #1a4d2e; margin-bottom: 12px; }
+  .service-area-intro { font-size: 16px; color: #555; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .area-card {
+    background: #fff;
+    border: 1px solid #d4edda;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a4d2e;
+    transition: all 0.2s;
+  }
+  .area-card:hover { background: #1a4d2e; color: #fff; transform: translateY(-2px); }
+  .area-card .city-icon { font-size: 22px; display: block; margin-bottom: 6px; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, #1a4d2e, #2d6a4f);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-banner h2 { font-size: clamp(26px, 3.5vw, 44px); font-weight: 800; color: #fff; margin-bottom: 16px; }
+  .cta-banner p { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
+  .cta-banner-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .service-detail-card { grid-template-columns: 1fr; }
+    .service-detail-card.reverse { direction: ltr; }
+    .service-detail-img { height: 260px; }
+    .service-detail-body { padding: 32px 24px; }
+    .area-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .area-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span class="current">Services</span>
+    </div>
+    <h1>Our Tree <span>Services</span></h1>
+    <p>Full-service tree care for residential and commercial properties across Forney, Crandall, Kemp, and the DFW area.</p>
+  </div>
+</section>
+
+<!-- SERVICES DETAIL -->
+<section class="services-detail">
+  <div class="container">
+
+    <!-- Tree Trimming -->
+    <div class="service-detail-card">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/34674271/pexels-photo-34674271.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Tree Trimming and Pruning Service" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">✂️</div>
+        <h2>Tree Trimming &amp; Pruning</h2>
+        <p>Regular trimming and pruning is one of the best investments you can make in your trees. Proper cuts encourage healthy growth, improve structure, and significantly reduce the risk of limb failure during storms.</p>
+        <p>Our certified climbers use industry-standard techniques to shape your trees for both beauty and safety — preserving the natural form while removing anything that poses a risk to your home or family.</p>
+        <ul class="service-detail-bullets">
+          <li>Crown thinning, lifting, and reduction</li>
+          <li>Dead wood removal and hazard limb pruning</li>
+          <li>Vista pruning for views and clearance</li>
+          <li>Fruit and ornamental tree pruning</li>
+        </ul>
+        <a href="/contact" class="btn-primary">Request This Service →</a>
+      </div>
+    </div>
+
+    <!-- Tree Removal -->
+    <div class="service-detail-card reverse">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/8821018/pexels-photo-8821018.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Tree Removal Service" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">🪓</div>
+        <h2>Tree Removal</h2>
+        <p>Sometimes a tree simply has to come down. Whether it's dead, diseased, storm-damaged, or just in the wrong spot, our team removes trees safely and efficiently — even in tight spaces near your home or power lines.</p>
+        <p>We use professional rigging and rigging techniques to control each section as it comes down, protecting your property every step of the way. Full cleanup and debris hauling are always included.</p>
+        <ul class="service-detail-bullets">
+          <li>Dead, dying, and hazardous tree removal</li>
+          <li>Controlled lowering near structures</li>
+          <li>Full debris cleanup and haul-off</li>
+          <li>Log splitting available upon request</li>
+        </ul>
+        <a href="/contact" class="btn-primary">Request This Service →</a>
+      </div>
+    </div>
+
+    <!-- Stump Grinding -->
+    <div class="service-detail-card">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/9806894/pexels-photo-9806894.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Stump Grinding Service" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">🔄</div>
+        <h2>Stump Grinding</h2>
+        <p>An old stump isn't just an eyesore — it's a tripping hazard, a target for pests, and a potential regrowth problem. Our stump grinding service eliminates stumps completely, grinding them below grade so you can mow, plant, or build over the spot.</p>
+        <p>We grind the stump and major surface roots, leaving only fine wood chips that can be raked out or used as mulch. Fast, clean, and complete.</p>
+        <ul class="service-detail-bullets">
+          <li>Grinding to 8–12 inches below grade</li>
+          <li>Root flare grinding available</li>
+          <li>Wood chip cleanup included</li>
+          <li>Any size stump — any age</li>
+        </ul>
+        <a href="/contact" class="btn-primary">Request This Service →</a>
+      </div>
+    </div>
+
+    <!-- Land Clearing -->
+    <div class="service-detail-card reverse">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/7763704/pexels-photo-7763704.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Land Clearing Service" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">🚜</div>
+        <h2>Land Clearing</h2>
+        <p>Whether you're prepping a lot for new construction, clearing fence lines, or reclaiming acreage that's grown over the years, Hodge Boys has the equipment and experience to get it done right.</p>
+        <p>We operate a Kubota SVL75-3 track skid steer with mulching and grapple attachments, allowing us to clear brush, trees, and debris efficiently on both small residential lots and larger commercial properties.</p>
+        <ul class="service-detail-bullets">
+          <li>Residential and commercial lot clearing</li>
+          <li>Brush and underbrush removal</li>
+          <li>Fence line and right-of-way clearing</li>
+          <li>Debris hauling and disposal</li>
+        </ul>
+        <a href="/contact" class="btn-primary">Request This Service →</a>
+      </div>
+    </div>
+
+    <!-- Emergency Tree Service -->
+    <div class="service-detail-card">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/5494032/pexels-photo-5494032.png?auto=compress&cs=tinysrgb&w=900" alt="Emergency Tree Service" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">🚨</div>
+        <h2>Emergency Tree Service</h2>
+        <p>Storms in the DFW and East Texas area can be severe and unpredictable. When a tree falls on your roof, blocks your driveway, or threatens your safety, you need fast, professional help — not next week, not tomorrow.</p>
+        <p>Hodge Boys Tree Service offers 24/7 emergency response for storm damage, fallen trees, and urgent hazard situations. We'll get there fast and handle the situation safely.</p>
+        <ul class="service-detail-bullets">
+          <li>24/7 availability — call anytime</li>
+          <li>Fallen tree and limb removal</li>
+          <li>Storm damage assessment and cleanup</li>
+          <li>Roof and structure protection</li>
+        </ul>
+        <a href="tel:4694372740" class="btn-primary" style="background:#ef4444;">📞 Emergency: 469-437-2740</a>
+      </div>
+    </div>
+
+    <!-- Tree Health -->
+    <div class="service-detail-card reverse">
+      <div class="service-detail-img">
+        <img src="https://images.pexels.com/photos/7812853/pexels-photo-7812853.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Tree Health and Maintenance" loading="lazy" />
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-icon">🌿</div>
+        <h2>Tree Health &amp; Maintenance</h2>
+        <p>Healthy trees are beautiful trees. But diseases, pests, drought stress, and poor soil conditions can take a toll — often before you even notice the problem. Our tree health services are designed to catch issues early and keep your trees thriving.</p>
+        <p>We offer visual inspections, fertilization programs, and disease/pest treatment recommendations to help preserve your most valuable landscape assets for years to come.</p>
+        <ul class="service-detail-bullets">
+          <li>Tree health inspections and assessments</li>
+          <li>Deep root fertilization</li>
+          <li>Disease and pest identification</li>
+          <li>Seasonal maintenance programs</li>
+        </ul>
+        <a href="/contact" class="btn-primary">Request This Service →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="service-area">
+  <div class="container">
+    <div class="badge">Where We Work</div>
+    <h2>Our Service Area</h2>
+    <p class="service-area-intro">
+      Hodge Boys Tree Service proudly serves homeowners and businesses across the Forney/Crandall/Kemp area and the surrounding DFW and East Texas communities. Not sure if we cover your area? Give us a call — we'll let you know.
+    </p>
+    <div class="area-grid">
+      <div class="area-card"><span class="city-icon">📍</span>Forney, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Crandall, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Kemp, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Waxahachie, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Mesquite, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Seagoville, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Kaufman, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Terrell, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Rockwall, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Balch Springs, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>Sunnyvale, TX</div>
+      <div class="area-card"><span class="city-icon">📍</span>&amp; surrounding DFW areas</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Ready to Get Started?</h2>
+  <p>Call <strong>469-437-2740</strong> or request your free estimate online. We'll come out, assess your trees, and give you a clear, honest quote — no obligation.</p>
+  <div class="cta-banner-btns">
+    <a href="/contact" class="btn-primary" style="font-size:16px; padding:16px 32px;">
+      Request a Free Estimate →
+    </a>
+    <a href="tel:4694372740" style="color:#fff; font-size:18px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">
+      📞 469-437-2740
+    </a>
+  </div>
+</section>
+
+</TreeLayout>

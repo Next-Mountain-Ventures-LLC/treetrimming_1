@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://next-mountain-ventures-llc.github.io/treetrimming_1",
-  base: "/treetrimming_1",
+  base: process.env.NODE_ENV === "production" ? "/treetrimming_1" : "/",
 
   // Required for GitHub Pages
   output: "static",
